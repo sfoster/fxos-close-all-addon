@@ -2,11 +2,10 @@
 scriptdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null && pwd )"
 name="close-all-addon"
 tmpdir=`mktemp -d` && cd $dir
+trap "rm -rf $tmpdir" EXIT
 
 cd "$scriptdir/.."
 cp -R . $tmpdir
-[ -e "$tmpdir/dist/${name}.zip" ] && rm "$tmpdir/dist/${name}.zip"
-[ -d "$tmpdir/bin" ] && rm -R "$tmpdir/bin"
 
-zip -R "${name}.zip" *
+zip -R "${name}.zip" * -x .git\* dist\* dir\*
 mv "${name}.zip" "$scriptdir/../dist/"
