@@ -1,0 +1,18 @@
+{
+  "name": "Close All Add-on",
+  "description": "Close all apps from task manager add-on",
+  "developer": {
+    "name": "Sam Foster"
+  },
+  "customizations": [{
+    "filter": "system.gaiamobile.org",
+    "scripts": ["./index.js"],
+    "css": ["./style.css"]
+  }],
+  "role": "addon",
+  "package_path": "dist/close-all-addon.zip",
+  "type": "certified",
+  "icons": {
+    "128": "icons/cameo-scythe-128.png"
+  }
+}
