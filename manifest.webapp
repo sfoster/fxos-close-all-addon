@@ -11,5 +11,8 @@
   }],
   "role": "addon",
   "package_path": "dist/close-all-addon.zip",
-  "type": "certified"
+  "type": "certified",
+  "icons": {
+    "128": "icons/cameo-scythe-128.png"
+  }
 }

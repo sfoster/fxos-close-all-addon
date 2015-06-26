@@ -7,5 +7,5 @@ trap "rm -rf $tmpdir" EXIT
 cd "$scriptdir/.."
 cp -R . $tmpdir
 
-zip -R "${name}.zip" * -x .git\* dist\* dir\*
+zip -r "${name}.zip" . -x .git\* dist\* bin\*
 mv "${name}.zip" "$scriptdir/../dist/"
