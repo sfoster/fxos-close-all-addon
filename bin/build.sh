@@ -5,10 +5,13 @@ tmpdir=`mktemp -d` && cd $dir
 trap "rm -rf $tmpdir" EXIT
 
 cd "$scriptdir/../src"
-cp -R . $tmpdir
+cp -R . "$tmpdir/"
+cd $tmpdir
 
+echo creating ${name}.zip
 zip -r "${name}.zip" . -x .git\*
+
 cd "$scriptdir/../dist/"
-rm -R ./*
+rm -R *
 mv "$tmpdir/${name}.zip" ./
 unzip "${name}.zip"
