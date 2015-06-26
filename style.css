@@ -1,0 +1,30 @@
+#cards-view > button#cards-view-close-all-btn {
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 4rem;
+  height: 4rem;
+  border: none;
+  pointer-events: auto;
+  background: transparent;
+}
+#cards-view > button#cards-view-close-all-btn:after {
+  content: "";
+  width: 2.6rem;
+  height: 2.6rem;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background-size: 20px 20px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #fff;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wYaCxoznPAyLQAAAL1JREFUSMft069qgnEUxvGPf4JBQRZleUEE4Y1ifmHGXcjCWNgNmJZ2EV6EXYMYvYSFJdEu4soJbxAW9vshwnvKgROe7/nznIa/o0CJZzxghUXk5DHFFhesMckBaeMzIGd8oZMD9BqQS0z1mAMyr0C+MUoNaGJZgezDFE/opoIMcKhADjjhI7W7SrzH4Tfop17XS3Rei9+p+Aw7DHN1Pown+sFbrrUUlYeq3VKL31i8TCneulIboxdTHP8L+AW22UI2Hz7v8wAAAABJRU5ErkJggg==);
+  border-radius: 1.3rem;
+  border: solid 1px #666;
+}
+
+#cards-view.active:not(.empty) > button#cards-view-close-all-btn {
+  visibility: visible;
+}
