@@ -4,8 +4,11 @@ name="close-all-addon"
 tmpdir=`mktemp -d` && cd $dir
 trap "rm -rf $tmpdir" EXIT
 
-cd "$scriptdir/.."
+cd "$scriptdir/../src"
 cp -R . $tmpdir
 
-zip -r "${name}.zip" . -x .git\* dist\* bin\*
-mv "${name}.zip" "$scriptdir/../dist/"
+zip -r "${name}.zip" . -x .git\*
+cd "$scriptdir/../dist/"
+rm -R ./*
+mv "$tmpdir/${name}.zip" ./
+unzip "${name}.zip"
