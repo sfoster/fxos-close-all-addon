@@ -10,7 +10,7 @@
     "css": ["./style.css"]
   }],
   "role": "addon",
-  "package_path": "dist/close-all-addon.zip",
+  "package_path": "./close-all-addon.zip",
   "type": "certified",
   "icons": {
     "128": "icons/cameo-scythe-128.png"
