@@ -8,18 +8,15 @@
     name: 'close-all-addon',
     buttonId: 'cards-view-close-all-btn',
     initialize: function() {
-      var isInitialized = document.documentElement.dataset.closeAllInitialized;
-      var taskManager = window.wrappedJSObject.appWindowManager.taskManager;
-      this.debug(this.name + ': isInitialized: ', isInitialized);
+      var isInitialized = document.documentElement &&
+                          document.documentElement.dataset.closeAllInitialized;
       if (isInitialized) {
         this.uninitialize();
         setTimeout(this.initialize.bind(this));
         return;
       }
-      this._showing = taskManager.isShown();
-      this._closing = false;
 
-      var container = document.getElementById('cards-view');
+      var container = document.getElementById('screen');
       if (container) {
         var btn = document.createElement('button');
         btn.id = this.buttonId;
@@ -32,9 +29,20 @@
       } else {
         this.debug(this.name + ': failed to find task manager element to inject into');
         document.addEventListener('DOMContentLoaded', this.initialize.bind(this));
+        return;
       }
+
+      var taskManager = (window.wrappedJSObject.appWindowManager &&
+                        window.wrappedJSObject.appWindowManager.taskManager);
+      if (taskManager) {
+        this._showing = taskManager.isShown();
+      }
+      this._closing = false;
     },
     uninitialize: function() {
+      if (document.documentElement) {
+        delete document.documentElement.dataset.closeAllInitialized;
+      }
       var btn = document.getElementById('show-windows-button');
       if (btn) {
         btn.removeEventListener('click', this);
@@ -42,7 +50,6 @@
       }
       window.removeEventListener('cardviewshown', this);
       window.removeEventListener('cardviewbeforeclose', this);
-      delete document.documentElement.dataset.closeAllInitialized;
       this._closing = false;
       this._showing = false;
     },
@@ -63,8 +70,13 @@
       }
     },
     closeAllCards: function() {
+      var taskManager = (window.wrappedJSObject.appWindowManager &&
+                         window.wrappedJSObject.appWindowManager.taskManager);
+      if (!taskManager) {
+        return;
+      }
+
       this._closing = true;
-      var taskManager = window.wrappedJSObject.appWindowManager.taskManager;
       var cards = Array.from(taskManager.cardsList.children).map(function(elem) {
         return taskManager.getCardForElement(elem);
       });
@@ -91,7 +103,7 @@
     },
     debug: function() {
       var cons = window.console || window.wrappedJSObject.console;
-      cons.log.apply(cons,arguments);
+      cons.log.apply(cons, arguments);
     }
   };
 
